@@ -19,6 +19,10 @@ app.get("/", (req, res) => {
 const todosRoutes = require("./routes/todos");
 app.use("/todos", todosRoutes);
 
+//categories router
+const categoriesRoutes = require("./routes/categories");
+app.use("/categories", categoriesRoutes);
+
 
 //Server start
 app.listen("3000", (err) => {

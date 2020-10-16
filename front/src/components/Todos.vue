@@ -4,7 +4,7 @@
       <v-card flat>
         <v-toolbar color="grey" dark flat>
 
-          <v-toolbar-title>Inbox</v-toolbar-title>
+          <v-toolbar-title>Categories</v-toolbar-title>
 
           <v-spacer></v-spacer>
 
