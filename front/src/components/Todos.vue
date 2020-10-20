@@ -14,13 +14,16 @@
         </v-toolbar>
 
         <v-list color="transparent">
-          <v-list-item v-for="todo in todos" :key="todo.id" link>
+          <v-list-item-group color="green">
+            
+          <v-list-item v-for="category in categories" :key="category.id" link>
             <v-list-item-content>
               <v-list-item-title>
-                {{ todo.name }}
+                {{ category.name }}
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          </v-list-item-group>
         </v-list>
       </v-card>
     </v-col>
@@ -48,14 +51,27 @@ export default {
   data: () => {
     return {
       todos: [],
+      categories: []
     };
   },
   mounted: function () {
+    //FETCH TODOS
     axios
       .get("http://localhost:3000/todos/")
       .then((res) => {
-        console.log("Fetched data successfully");
+        console.log("Fetched todos successfully");
         this.todos = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //FETCH CATEGORIES
+    axios
+      .get("http://localhost:3000/categories/")
+      .then((res) => {
+        console.log("Fetched categories successfully");
+        this.categories = res.data;
       })
       .catch((err) => {
         console.log(err);
