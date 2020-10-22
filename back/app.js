@@ -1,10 +1,12 @@
 const express = require("express");
 const cors = require("cors");
+const bodyparser = require("body-parser");
 const app = express();
 
 const {log} = require("./middlewares");
 
 //Global middlewares
+app.use(bodyparser.json());
 app.use(cors());
 app.use(log);
 

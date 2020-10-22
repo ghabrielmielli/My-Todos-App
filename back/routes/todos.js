@@ -11,6 +11,18 @@ router.route("/")
         res.send(results);
     })
 })
+.post((req, res) => {
+    let sql = "INSERT INTO todo (name, category) VALUES (?, ?)";
+    console.log("imprimindo valores:");
+    console.log("nome: " + req.body.name);
+    console.log("categoria: " + req.body.category);
+    db.query(sql, [req.body.name, req.body.category], (err, results) => {
+        if (err) throw err;
+        results.message = "Successfully posted new data";
+        res.send(results);
+    })
+    
+});
 
 router.route("/:id")
 .get((req, res) => {
@@ -20,9 +32,6 @@ router.route("/:id")
         if (err) throw err;
         res.send(results);
     })
-})
-.post((req, res) => {
-    res.send(`Yo posting ${req.params.id} on todo list :D`);
-})
+});
 
-module.exports = router;
+module.exports = router; 
