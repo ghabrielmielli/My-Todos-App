@@ -52,20 +52,28 @@
 						<!-- items-->
 						<v-list-item v-for="todo in filteredTodos" :key="todo.id" class="fade-item">
 							<v-list-item-action>
-								<v-checkbox v-model="todo.done" color="primary"></v-checkbox>
+								<v-checkbox v-model="todo.done" color="grey" @click="checkTodo(todo)"></v-checkbox>
 							</v-list-item-action>
 
 							<v-list-item-content>
-								<v-list-item-title>
+								<v-list-item-title v-if="editingTodo != todo.id" @click="editTodo(todo)" @dblclick="deleteTodo(todo)" :class="{ 'text--disabled': todo.done }">
 									{{ todo.name }}
 								</v-list-item-title>
+								<v-list-item-title v-else>
+									<v-row dense>
+										<v-col cols="6">
+											<v-text-field
+												dense
+												:placeholder="todo.name"
+												autofocus
+												@blur="editingTodo = -1"
+												@keyup.enter="updateTodo(todo)"
+												v-model="todo.name"
+											></v-text-field>
+										</v-col>
+									</v-row>
+								</v-list-item-title>
 							</v-list-item-content>
-
-							<v-scroll-x-transition>
-								<v-icon v-if="todo.done" color="success">
-									mdi-check
-								</v-icon>
-							</v-scroll-x-transition>
 						</v-list-item>
 					</transition-group>
 				</v-list>
@@ -86,6 +94,7 @@
 
 				selectedCategory: 0,
 				newTodo: "",
+				editingTodo: -1,
 			};
 		},
 		mounted: function() {
@@ -133,6 +142,48 @@
 					.catch((err) => {
 						console.log(err);
 					});
+			},
+			deleteTodo: function(todo) {
+				axios.delete(`http://localhost:3000/todos/${todo.id}`)
+					.then((response) => {
+						console.log(response.status + " - " + response.data.message);
+						this.todos.splice(this.todos.indexOf(todo), 1);
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			},
+			checkTodo(todo) {
+				axios.patch(`http://localhost:3000/todos/${todo.id}`, {
+					done: todo.done,
+				})
+					.then((response) => {
+						console.log(response.status + " - " + response.data.message);
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			},
+			updateTodo(todo) {
+				this.editingTodo = null;
+				axios.patch(`http://localhost:3000/todos/${todo.id}`, {
+					name: todo.name,
+				})
+					.then((response) => {
+						console.log(response.status + " - " + response.data.message);
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			},
+			editTodo(todo) {
+				setTimeout(
+					function() {
+						this.editingTodo = this.todos.indexOf(todo) != null ? todo.id : -1;
+						console.log(this.editingTodo);
+					}.bind(this),
+					200
+				);
 			},
 		},
 	};
