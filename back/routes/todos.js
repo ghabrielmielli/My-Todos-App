@@ -51,4 +51,17 @@ router.route("/:id")
 		});
 	});
 
+router.route("/checked/:category").delete((req, res) => {
+	console.log("printing request stuff.......");
+	console.log(req.params.category);
+
+	let sql = req.params.category > 0 ? "DELETE FROM todo WHERE category = ? AND done = true" : "DELETE FROM todo WHERE done = true";
+
+	db.query(sql, req.params.category ? [req.params.category] : [], (err, results) => {
+		if (err) throw err;
+		results.message = "Successfully deleted data.";
+		res.send(results);
+	});
+});
+
 module.exports = router;

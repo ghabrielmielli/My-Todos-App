@@ -14,7 +14,7 @@
 				</v-toolbar>
 
 				<v-list color="transparent">
-					<v-list-item-group color="green" v-model="selectedCategory">
+					<v-list-item-group color="grey-darken-2" v-model="selectedCategory">
 						<v-list-item v-for="category in categories" :key="category.id" link>
 							<v-list-item-content>
 								<v-list-item-title>
@@ -28,9 +28,9 @@
 		</v-col>
 		<!-- todos section -->
 		<v-col cols="6">
-			<v-card min-height="70vh" rounded="lg">
+			<v-card flat min-height="70vh" rounded="lg">
 				<v-list>
-					<!-- add todos section -->
+					<!-- add/delete done todos section -->
 					<v-list-item>
 						<v-list-item-title>
 							<v-row dense>
@@ -44,6 +44,18 @@
 										@keyup.enter="postNewTodo"
 										v-model="newTodo"
 									></v-text-field>
+								</v-col>
+								<v-spacer></v-spacer>
+								<v-col cols="auto">
+									<v-tooltip bottom open-delay="800">
+										<template v-slot:activator="{ on, attrs }">
+											<v-btn small dark depressed :disabled="selectedCategory == undefined" color="grey" v-bind="attrs" v-on="on" @click="cleanDone"
+												><v-icon>mdi-trash-can-outline</v-icon></v-btn
+											>
+										</template>
+										<p>Delete all marked todos from this category.</p>
+										<p>Delete all marked todos if no category is selected.</p>
+									</v-tooltip>
 								</v-col>
 							</v-row>
 						</v-list-item-title>
@@ -180,10 +192,19 @@
 				setTimeout(
 					function() {
 						this.editingTodo = this.todos.indexOf(todo) != null ? todo.id : -1;
-						console.log(this.editingTodo);
 					}.bind(this),
 					200
 				);
+			},
+			cleanDone() {
+				axios.delete(`http://localhost:3000/todos/checked/${this.selectedCategory}`)
+					.then((response) => {
+						console.log(response.status + " - " + response.data.message);
+						this.fetchTodos();
+					})
+					.catch((err) => {
+						console.log(err);
+					});
 			},
 		},
 	};
