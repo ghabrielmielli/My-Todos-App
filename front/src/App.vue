@@ -22,7 +22,14 @@
 
 		<v-main class="grey lighten-1">
 			<v-container fluid>
-				<Todos></Todos>
+				<v-row>
+					<v-col cols="3">
+						<Categories></Categories>
+					</v-col>
+					<v-col cols="6">
+						<Todos></Todos>
+					</v-col>
+				</v-row>
 			</v-container>
 		</v-main>
 	</v-app>
@@ -30,12 +37,12 @@
 
 <script>
 	import Todos from "./components/Todos";
+	import Categories from "./components/Categories";
+
 	export default {
 		components: {
 			Todos,
-		},
-		data: function() {
-			return {};
+			Categories,
 		},
 	};
 </script>

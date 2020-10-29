@@ -9,4 +9,7 @@ new Vue({
 	vuetify,
 	store,
 	render: (h) => h(App),
+	beforeCreate: function() {
+		store.dispatch("initialize");
+	},
 }).$mount("#app");
