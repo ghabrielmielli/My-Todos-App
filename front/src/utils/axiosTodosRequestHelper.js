@@ -29,4 +29,37 @@ export default {
 				console.log(err);
 			});
 	},
+	delete_todo(ctx, todo) {
+		axios.delete(routes.delete_todo(todo.id))
+			.then((response) => {
+				console.log(response.status + " - " + response.data.message);
+				ctx.commit("delete_todo", todo);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	},
+	patch_todo(ctx, todo, key, value) {
+		var payload = { key, value };
+		if (key) {
+			axios.patch(routes.update_todo(todo.id), payload)
+				.then((response) => {
+					console.log(response.status + " - " + response.data.message);
+					ctx.commit("patch_todo", todo);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	},
+	delete_done_todos(ctx) {
+		axios.delete(routes.delete_done_todos(ctx.get_selected_category))
+			.then((response) => {
+				console.log(response.status + " - " + response.data.message);
+				ctx.dispatch("fetch_todos");
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	},
 };

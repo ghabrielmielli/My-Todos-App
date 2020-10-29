@@ -39,12 +39,9 @@ router.route("/:id")
 		});
 	})
 	.patch((req, res) => {
-		let key = Object.keys(req.body)[0];
-		let value = Object.values(req.body)[0];
+		let sql = `UPDATE todo SET ${req.body.key} = ? WHERE id = ?`;
 
-		let sql = `UPDATE todo SET ${key} = ? WHERE id = ?`;
-
-		db.query(sql, [value, req.params.id], (err, results) => {
+		db.query(sql, [req.body.value, req.params.id], (err, results) => {
 			if (err) throw err;
 			results.message = "The todo was updated successfully.";
 			res.send(results);

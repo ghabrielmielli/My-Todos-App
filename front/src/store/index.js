@@ -6,12 +6,13 @@ import categoryRequests from "../utils/axiosCategoriesRequestHelper";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+	strict: true,
+
 	state: {
 		todos: [],
 		categories: [],
 
 		selectedCategory: 0, //0 is all categories, -1 is no category.
-		editingTodo: -1,
 	},
 	mutations: {
 		set_todos(state, todos) {
@@ -26,6 +27,17 @@ export default new Vuex.Store({
 		set_selected_category(state, categoryId) {
 			state.selectedCategory = categoryId;
 		},
+		delete_todo(state, todo) {
+			state.todos.splice(state.todos.indexOf(todo), 1);
+		},
+		patch_todo(state, sentTodo) {
+			state.todos.forEach((todo) => {
+				if (todo.id == sentTodo.id) {
+					todo = sentTodo;
+					return;
+				}
+			});
+		},
 	},
 	actions: {
 		fetch_todos(ctx) {
@@ -36,6 +48,15 @@ export default new Vuex.Store({
 		},
 		add_todo(ctx, todoName) {
 			todoRequests.insert_todo(ctx, todoName);
+		},
+		delete_todo(ctx, todo) {
+			todoRequests.delete_todo(ctx, todo);
+		},
+		patch_todo(ctx, [todo, key, value]) {
+			todoRequests.patch_todo(ctx, todo, key, value);
+		},
+		delete_done_todos(ctx) {
+			todoRequests.delete_done_todos(ctx);
 		},
 
 		initialize(ctx) {

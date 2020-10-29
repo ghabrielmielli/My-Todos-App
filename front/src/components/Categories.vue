@@ -26,22 +26,26 @@
 
 <script>
 	import { mapGetters } from "vuex";
+	import { mapMutations } from "vuex";
 
 	export default {
-		data() {
-			return {
-				selectedCategory: 0,
-			};
-		},
-		watch: {
-			selectedCategory: function() {
-				this.$store.commit("set_selected_category", this.selectedCategory);
-			},
-		},
 		computed: {
 			...mapGetters({
 				categories: "get_categories",
+				getSelected: "get_selected_category",
 			}),
+
+			selectedCategory: {
+				get() {
+					return this.getSelected;
+				},
+				set(category) {
+					this.set_selected_category(category);
+				},
+			},
+		},
+		methods: {
+			...mapMutations(["set_selected_category"]),
 		},
 	};
 </script>

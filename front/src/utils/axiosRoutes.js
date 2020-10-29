@@ -16,7 +16,7 @@ module.exports = {
 
 	//multiple todos
 	get_todos: `${URL}todos`,
-	delete_done_todos: (activeCategory) => `${URL}todos/checked/${activeCategory}`,
+	delete_done_todos: (selectedCategory) => `${URL}todos/checked/${selectedCategory}`,
 
 	//multiple categories
 	get_categories: `${URL}categories`,

@@ -1,7 +1,7 @@
 <template>
 	<v-card flat min-height="70vh" rounded="lg">
 		<v-list>
-			<!-- add/delete done todos section -->
+			<!-- toolbar section -->
 			<v-list-item>
 				<v-list-item-title>
 					<v-row dense>
@@ -11,8 +11,14 @@
 								dense
 								append-outer-icon="mdi-plus"
 								placeholder="New todo"
-								@click:append-outer="postNewTodo"
-								@keyup.enter="postNewTodo"
+								@click:append-outer="
+									add_todo(newTodo);
+									newTodo = '';
+								"
+								@keyup.enter="
+									add_todo(newTodo);
+									newTodo = '';
+								"
 								v-model="newTodo"
 							></v-text-field>
 						</v-col>
@@ -20,7 +26,7 @@
 						<v-col cols="auto">
 							<v-tooltip bottom open-delay="800">
 								<template v-slot:activator="{ on, attrs }">
-									<v-btn small dark depressed :disabled="selectedCategory == undefined" color="grey" v-bind="attrs" v-on="on" @click="cleanDone"
+									<v-btn small dark depressed :disabled="selectedCategory == undefined" color="grey" v-bind="attrs" v-on="on" @click="delete_done_todos()"
 										><v-icon>mdi-trash-can-outline</v-icon></v-btn
 									>
 								</template>
@@ -32,14 +38,14 @@
 				</v-list-item-title>
 			</v-list-item>
 			<transition-group name="fade" mode="out-in">
-				<!-- items-->
+				<!-- items section -->
 				<v-list-item v-for="todo in filteredTodos" :key="todo.id" class="fade-item">
 					<v-list-item-action>
-						<v-checkbox v-model="todo.done" color="grey" @click="checkTodo(todo)"></v-checkbox>
+						<v-checkbox v-model="todo.done" color="grey" @click="patch_todo([todo, 'done', todo.done])"></v-checkbox>
 					</v-list-item-action>
 
 					<v-list-item-content>
-						<v-list-item-title v-if="editingTodo != todo.id" @click="editTodo(todo)" @dblclick="deleteTodo(todo)" :class="{ 'text--disabled': todo.done }">
+						<v-list-item-title v-if="editingTodo != todo.id" @click="editTodo(todo)" @dblclick="delete_todo(todo)" :class="{ 'text--disabled': todo.done }">
 							{{ todo.name }}
 						</v-list-item-title>
 						<v-list-item-title v-else>
@@ -50,7 +56,10 @@
 										:placeholder="todo.name"
 										autofocus
 										@blur="editingTodo = -1"
-										@keyup.enter="updateTodo(todo)"
+										@keyup.enter="
+											patch_todo([todo, 'name', todo.name]);
+											editingTodo = -1;
+										"
 										v-model="todo.name"
 									></v-text-field>
 								</v-col>
@@ -63,12 +72,12 @@
 	</v-card>
 </template>
 <script>
-	import axios from "axios";
 	import { mapGetters } from "vuex";
+	import { mapActions } from "vuex";
 
 	export default {
 		name: "App",
-		data: () => {
+		data() {
 			return {
 				newTodo: "",
 				editingTodo: -1,
@@ -82,59 +91,15 @@
 			}),
 		},
 		methods: {
-			postNewTodo: function() {
-				this.$store.dispatch("add_todo", this.newTodo);
-			},
-			deleteTodo: function(todo) {
-				axios.delete(`http://localhost:3000/todos/${todo.id}`)
-					.then((response) => {
-						console.log(response.status + " - " + response.data.message);
-						this.todos.splice(this.todos.indexOf(todo), 1);
-					})
-					.catch((err) => {
-						console.log(err);
-					});
-			},
-			checkTodo(todo) {
-				axios.patch(`http://localhost:3000/todos/${todo.id}`, {
-					done: todo.done,
-				})
-					.then((response) => {
-						console.log(response.status + " - " + response.data.message);
-					})
-					.catch((err) => {
-						console.log(err);
-					});
-			},
-			updateTodo(todo) {
-				this.editingTodo = null;
-				axios.patch(`http://localhost:3000/todos/${todo.id}`, {
-					name: todo.name,
-				})
-					.then((response) => {
-						console.log(response.status + " - " + response.data.message);
-					})
-					.catch((err) => {
-						console.log(err);
-					});
-			},
+			...mapActions(["add_todo", "delete_todo", "patch_todo", "delete_done_todos"]),
+
 			editTodo(todo) {
 				setTimeout(
 					function() {
-						this.editingTodo = this.todos.indexOf(todo) != null ? todo.id : -1;
+						this.editingTodo = this.todos.indexOf(todo) != null ? todo.id : null;
 					}.bind(this),
 					200
 				);
-			},
-			cleanDone() {
-				axios.delete(`http://localhost:3000/todos/checked/${this.selectedCategory}`)
-					.then((response) => {
-						console.log(response.status + " - " + response.data.message);
-						this.$store.dispatch("fetch_todos");
-					})
-					.catch((err) => {
-						console.log(err);
-					});
 			},
 		},
 	};
