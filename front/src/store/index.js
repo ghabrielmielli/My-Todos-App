@@ -16,6 +16,9 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		set_todos(state, todos) {
+			todos.forEach((todo) => {
+				todo.done = todo.done == 0 ? false : true;
+			});
 			state.todos = todos;
 		},
 		set_categories(state, categories) {
@@ -28,15 +31,10 @@ export default new Vuex.Store({
 			state.selectedCategory = categoryId;
 		},
 		delete_todo(state, todo) {
-			state.todos.splice(state.todos.indexOf(todo), 1);
+			state.todos = state.todos.filter((el) => el.id != todo.id);
 		},
-		patch_todo(state, sentTodo) {
-			state.todos.forEach((todo) => {
-				if (todo.id == sentTodo.id) {
-					todo = sentTodo;
-					return;
-				}
-			});
+		patch_todo(state, [todo, key, value]) {
+			todo[key] = value;
 		},
 	},
 	actions: {
@@ -69,5 +67,7 @@ export default new Vuex.Store({
 		get_filtered_todos_by_category: (state) => state.todos.filter((todo) => (state.selectedCategory == 0 ? true : todo.category == state.selectedCategory)),
 		get_categories: (state) => state.categories,
 		get_selected_category: (state) => state.selectedCategory,
+
+		get_todo_by_id: (state) => (id) => state.todos.find((todo) => todo.id === id),
 	},
 });

@@ -37,36 +37,17 @@
 					</v-row>
 				</v-list-item-title>
 			</v-list-item>
+			<!-- items section -->
 			<transition-group name="fade" mode="out-in">
-				<!-- items section -->
-				<v-list-item v-for="todo in filteredTodos" :key="todo.id" class="fade-item">
-					<v-list-item-action>
-						<v-checkbox v-model="todo.done" color="grey" @click="patch_todo([todo, 'done', todo.done])"></v-checkbox>
-					</v-list-item-action>
-
-					<v-list-item-content>
-						<v-list-item-title v-if="editingTodo != todo.id" @click="editTodo(todo)" @dblclick="delete_todo(todo)" :class="{ 'text--disabled': todo.done }">
-							{{ todo.name }}
-						</v-list-item-title>
-						<v-list-item-title v-else>
-							<v-row dense>
-								<v-col cols="6">
-									<v-text-field
-										dense
-										:placeholder="todo.name"
-										autofocus
-										@blur="editingTodo = -1"
-										@keyup.enter="
-											patch_todo([todo, 'name', todo.name]);
-											editingTodo = -1;
-										"
-										v-model="todo.name"
-									></v-text-field>
-								</v-col>
-							</v-row>
-						</v-list-item-title>
-					</v-list-item-content>
-				</v-list-item>
+				<TodoItem
+					v-for="todo in filteredTodos"
+					:key="todo.id"
+					class="fade-item"
+					:todo="{ ...todo }"
+					:isEditing="todo.id == editingTodo"
+					@edit-me="editingTodo = todo.id"
+					@finish-edit="editingTodo = -1"
+				></TodoItem>
 			</transition-group>
 		</v-list>
 	</v-card>
@@ -74,9 +55,12 @@
 <script>
 	import { mapGetters } from "vuex";
 	import { mapActions } from "vuex";
+	import TodoItem from "./TodoItem";
 
 	export default {
-		name: "App",
+		components: {
+			TodoItem,
+		},
 		data() {
 			return {
 				newTodo: "",
@@ -91,16 +75,7 @@
 			}),
 		},
 		methods: {
-			...mapActions(["add_todo", "delete_todo", "patch_todo", "delete_done_todos"]),
-
-			editTodo(todo) {
-				setTimeout(
-					function() {
-						this.editingTodo = this.todos.indexOf(todo) != null ? todo.id : null;
-					}.bind(this),
-					200
-				);
-			},
+			...mapActions(["add_todo", "delete_done_todos"]),
 		},
 	};
 </script>

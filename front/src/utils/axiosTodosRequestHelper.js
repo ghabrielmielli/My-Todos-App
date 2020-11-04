@@ -45,7 +45,7 @@ export default {
 			axios.patch(routes.update_todo(todo.id), payload)
 				.then((response) => {
 					console.log(response.status + " - " + response.data.message);
-					ctx.commit("patch_todo", todo);
+					ctx.commit("patch_todo", [ctx.getters.get_todo_by_id(todo.id), key, value]);
 				})
 				.catch((err) => {
 					console.log(err);
