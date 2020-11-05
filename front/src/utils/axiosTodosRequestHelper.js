@@ -62,4 +62,15 @@ export default {
 				console.log(err);
 			});
 	},
+
+	equalize_all_from_category(ctx, category, changeToDone) {
+		axios.patch(routes.check_uncheck_todos_from_category(category), { changeToDone })
+			.then((response) => {
+				console.log(response.status + " - " + response.data.message);
+				ctx.dispatch("fetch_todos");
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	},
 };

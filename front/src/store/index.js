@@ -61,6 +61,15 @@ export default new Vuex.Store({
 			ctx.dispatch("fetch_todos");
 			ctx.dispatch("fetch_categories");
 		},
+
+		check_uncheck_all_todos(ctx) {
+			let category = ctx.getters.get_selected_category;
+			var todos = ctx.getters.get_filtered_todos_by_category;
+
+			//If the loop bumps into an undone todo, it asks to check 'em all. Does otherwise if it doesn't.
+			for (let i = 0; i < todos.length; i++) if (!todos[i].done) return todoRequests.equalize_all_from_category(ctx, category, true);
+			todoRequests.equalize_all_from_category(ctx, category, false);
+		},
 	},
 	getters: {
 		get_todos: (state) => state.todos,

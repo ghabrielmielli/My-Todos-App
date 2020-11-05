@@ -27,7 +27,7 @@
 						<Categories></Categories>
 					</v-col>
 					<v-col cols="6">
-						<Todos></Todos>
+						<TodoList></TodoList>
 					</v-col>
 				</v-row>
 			</v-container>
@@ -36,12 +36,12 @@
 </template>
 
 <script>
-	import Todos from "./components/Todos";
+	import TodoList from "./components/TodoList";
 	import Categories from "./components/Categories";
 
 	export default {
 		components: {
-			Todos,
+			TodoList,
 			Categories,
 		},
 	};

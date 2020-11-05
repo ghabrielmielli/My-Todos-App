@@ -5,6 +5,7 @@
 			<v-list-item>
 				<v-list-item-title>
 					<v-row dense>
+						<!-- Add todo field -->
 						<v-col cols="6">
 							<v-text-field
 								:disabled="!selectedCategory"
@@ -22,16 +23,31 @@
 								v-model="newTodo"
 							></v-text-field>
 						</v-col>
+
 						<v-spacer></v-spacer>
+
+						<!-- check all todos button -->
 						<v-col cols="auto">
 							<v-tooltip bottom open-delay="800">
 								<template v-slot:activator="{ on, attrs }">
-									<v-btn small dark depressed :disabled="selectedCategory == undefined" color="grey" v-bind="attrs" v-on="on" @click="delete_done_todos()"
-										><v-icon>mdi-trash-can-outline</v-icon></v-btn
-									>
+									<v-btn small dark depressed :disabled="selectedCategory == undefined" color="grey" v-bind="attrs" v-on="on" @click="check_uncheck_all_todos()">
+										<v-icon>mdi-check</v-icon>
+									</v-btn>
 								</template>
-								<p>Delete all marked todos from this category.</p>
-								<p>Delete all marked todos if no category is selected.</p>
+								Checks/unchecks all todos
+							</v-tooltip>
+						</v-col>
+
+						<!-- Delete done todos button -->
+						<v-col cols="auto">
+							<v-tooltip bottom open-delay="800">
+								<template v-slot:activator="{ on, attrs }">
+									<v-btn small dark depressed :disabled="selectedCategory == undefined" color="grey" v-bind="attrs" v-on="on" @click="delete_done_todos()">
+										<v-icon>mdi-trash-can-outline</v-icon>
+									</v-btn>
+								</template>
+								Delete all marked todos from this category.<br />
+								Delete all marked todos if no category is selected.
 							</v-tooltip>
 						</v-col>
 					</v-row>
@@ -75,7 +91,7 @@
 			}),
 		},
 		methods: {
-			...mapActions(["add_todo", "delete_done_todos"]),
+			...mapActions(["add_todo", "delete_done_todos", "check_uncheck_all_todos"]),
 		},
 	};
 </script>
