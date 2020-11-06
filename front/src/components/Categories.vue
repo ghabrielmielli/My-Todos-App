@@ -65,7 +65,7 @@
 					return this.getSelected;
 				},
 				set(category) {
-					this.set_selected_category(category);
+					this.set_selected_category(this.categories[category].id);
 				},
 			},
 		},
