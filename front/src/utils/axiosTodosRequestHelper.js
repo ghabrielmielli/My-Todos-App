@@ -53,7 +53,7 @@ export default {
 		}
 	},
 	delete_done_todos(ctx) {
-		axios.delete(routes.delete_done_todos(ctx.get_selected_category))
+		axios.delete(routes.delete_done_todos(ctx.getters.get_selected_category))
 			.then((response) => {
 				console.log(response.status + " - " + response.data.message);
 				ctx.dispatch("fetch_todos");
