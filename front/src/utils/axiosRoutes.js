@@ -19,6 +19,9 @@ module.exports = {
 	delete_done_todos: (selectedCategory) => `${URL}todos/fromCategory/${selectedCategory}`,
 	check_uncheck_todos_from_category: (selectedCategory) => `${URL}todos/fromCategory/${selectedCategory}`,
 
+	//single category
+	insert_category: `${URL}categories`,
+
 	//multiple categories
 	get_categories: `${URL}categories`,
 };

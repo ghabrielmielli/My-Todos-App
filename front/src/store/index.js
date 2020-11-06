@@ -15,6 +15,7 @@ export default new Vuex.Store({
 		selectedCategory: 0, //0 is all categories, -1 is no category.
 	},
 	mutations: {
+		//TODO stuff
 		set_todos(state, todos) {
 			todos.forEach((todo) => {
 				todo.done = todo.done == 0 ? false : true;
@@ -36,8 +37,15 @@ export default new Vuex.Store({
 		patch_todo(state, [todo, key, value]) {
 			todo[key] = value;
 		},
+
+		//Category stuff
+
+		add_category(state, category) {
+			state.categories.push(category);
+		},
 	},
 	actions: {
+		//TODO stuff
 		fetch_todos(ctx) {
 			todoRequests.get_todos(ctx);
 		},
@@ -69,6 +77,12 @@ export default new Vuex.Store({
 			//If the loop bumps into an undone todo, it asks to check 'em all. Does otherwise if it doesn't.
 			for (let i = 0; i < todos.length; i++) if (!todos[i].done) return todoRequests.equalize_all_from_category(ctx, category, true);
 			todoRequests.equalize_all_from_category(ctx, category, false);
+		},
+
+		// Category stuff
+
+		add_category(ctx, category) {
+			categoryRequests.insert_category(ctx, category);
 		},
 	},
 	getters: {
