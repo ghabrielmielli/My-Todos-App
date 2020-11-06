@@ -24,13 +24,15 @@
 		<!-- category list -->
 		<v-list color="transparent">
 			<v-list-item-group color="grey-darken-2" v-model="selectedCategory">
-				<v-list-item v-for="category in categories" :key="category.id" link>
-					<v-list-item-content>
-						<v-list-item-title>
-							{{ category.name }}
-						</v-list-item-title>
-					</v-list-item-content>
-				</v-list-item>
+				<v-slide-y-transition group>
+					<v-list-item v-for="category in categories" :key="category.id" link>
+						<v-list-item-content>
+							<v-list-item-title>
+								{{ category.name }}
+							</v-list-item-title>
+						</v-list-item-content>
+					</v-list-item>
+				</v-slide-y-transition>
 			</v-list-item-group>
 		</v-list>
 	</v-card>
@@ -65,7 +67,7 @@
 					return this.getSelected;
 				},
 				set(category) {
-					this.set_selected_category(this.categories[category].id);
+					this.set_selected_category(category != undefined ? this.categories[category].id : undefined);
 				},
 			},
 		},

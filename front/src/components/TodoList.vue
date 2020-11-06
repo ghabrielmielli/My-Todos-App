@@ -98,10 +98,10 @@
 
 <style scoped>
 	.fade-item {
-		transition: all 0.5s;
+		transition: all 0.3s;
 	}
-	.fade-enter, .fade-leave-to
-/* .fade-leave-active below version 2.1.8 */ {
+	.fade-enter,
+	.fade-leave-to {
 		opacity: 0;
 		transform: scaleY(0);
 	}
