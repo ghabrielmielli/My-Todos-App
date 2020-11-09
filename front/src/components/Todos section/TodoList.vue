@@ -21,27 +21,22 @@
 
 				<!-- check all todos button -->
 				<v-col cols="auto">
-					<v-tooltip bottom open-delay="800">
-						<template v-slot:activator="{ on, attrs }">
-							<v-btn small dark depressed :disabled="selectedCategory == undefined" color="grey" v-bind="attrs" v-on="on" @click="check_uncheck_all_todos()">
-								<v-icon>mdi-check</v-icon>
-							</v-btn>
-						</template>
-						Checks/unchecks all todos
-					</v-tooltip>
+					<ButtonWithTooltip
+						:disabled="selectedCategory == undefined"
+						icon="mdi-check"
+						tooltip="Checks/unchecks all todos"
+						@pressed="check_uncheck_all_todos()"
+					></ButtonWithTooltip>
 				</v-col>
 
 				<!-- Delete done todos button -->
 				<v-col cols="auto">
-					<v-tooltip bottom open-delay="800">
-						<template v-slot:activator="{ on, attrs }">
-							<v-btn small dark depressed :disabled="selectedCategory == undefined" color="grey" v-bind="attrs" v-on="on" @click="delete_done_todos()">
-								<v-icon>mdi-trash-can-outline</v-icon>
-							</v-btn>
-						</template>
-						Delete all marked todos from this category.<br />
-						Delete all marked todos if no category is selected.
-					</v-tooltip>
+					<ButtonWithTooltip
+						:disabled="selectedCategory == undefined"
+						icon="mdi-trash-can-outline"
+						tooltip="Delete all marked todos from this page"
+						@pressed="delete_done_todos()"
+					></ButtonWithTooltip>
 				</v-col>
 			</v-row>
 		</v-toolbar>
@@ -66,10 +61,12 @@
 	import { mapGetters } from "vuex";
 	import { mapActions } from "vuex";
 	import TodoItem from "./TodoItem";
+	import ButtonWithTooltip from "./ButtonWithTooltip";
 
 	export default {
 		components: {
 			TodoItem,
+			ButtonWithTooltip,
 		},
 		data() {
 			return {

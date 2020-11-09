@@ -1,13 +1,14 @@
 <template>
 	<v-list-item>
 		<v-list-item-action>
-			<v-checkbox :value="todo.done" v-model="checked" color="grey"></v-checkbox>
+			<v-checkbox :value="todo.done" v-model="checked" color="indigo lighten-1"></v-checkbox>
 		</v-list-item-action>
 
 		<v-list-item-content>
-			<v-list-item-title v-if="!isEditing" @click="editTodo()" @dblclick="delete_todo(todo)" :class="{ 'text--disabled': todo.done }">
+			<v-list-item-title v-if="!isEditing" @click="editTodo()" @dblclick="delete_todo(todo)" :class="{ 'text--disabled text-decoration-line-through': todo.done }">
 				{{ todo.name }}
 			</v-list-item-title>
+
 			<v-list-item-title v-else>
 				<v-row dense>
 					<v-col cols="6">
