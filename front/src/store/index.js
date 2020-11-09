@@ -43,6 +43,9 @@ export default new Vuex.Store({
 		add_category(state, category) {
 			state.categories.push(category);
 		},
+		patch_category(state, [category, key, value]) {
+			category[key] = value;
+		},
 	},
 	actions: {
 		//TODO stuff
@@ -84,6 +87,9 @@ export default new Vuex.Store({
 		add_category(ctx, category) {
 			categoryRequests.insert_category(ctx, category);
 		},
+		patch_category(ctx, [category, key, value]) {
+			categoryRequests.patch_category(ctx, category, key, value);
+		},
 	},
 	getters: {
 		get_todos: (state) => state.todos,
@@ -92,5 +98,6 @@ export default new Vuex.Store({
 		get_selected_category: (state) => state.selectedCategory,
 
 		get_todo_by_id: (state) => (id) => state.todos.find((todo) => todo.id === id),
+		get_category_by_id: (state) => (id) => state.categories.find((category) => category.id === id),
 	},
 });

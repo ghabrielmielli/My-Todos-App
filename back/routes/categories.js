@@ -31,6 +31,15 @@ router.route("/:id")
 	})
 	.post((req, res) => {
 		res.send(`Yo posting ${req.params.id} on category list :D`);
+	})
+	.patch((req, res) => {
+		let sql = `UPDATE category SET ${req.body.key} = ? WHERE id = ?`;
+
+		db.query(sql, [req.body.value, req.params.id], (err, results) => {
+			if (err) throw err;
+			results.message = "The category was updated successfully.";
+			res.send(results);
+		});
 	});
 
 module.exports = router;

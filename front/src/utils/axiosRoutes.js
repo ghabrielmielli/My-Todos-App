@@ -21,6 +21,7 @@ module.exports = {
 
 	//single category
 	insert_category: `${URL}categories`,
+	update_category: (categoryId) => `${URL}categories/${categoryId}`,
 
 	//multiple categories
 	get_categories: `${URL}categories`,

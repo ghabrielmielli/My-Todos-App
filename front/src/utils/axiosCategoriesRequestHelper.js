@@ -28,4 +28,18 @@ export default {
 				console.log(err);
 			});
 	},
+
+	patch_category(ctx, category, key, value) {
+		var payload = { key, value };
+		if (key) {
+			axios.patch(routes.update_category(category.id), payload)
+				.then((response) => {
+					console.log(response.status + " - " + response.data.message);
+					ctx.commit("patch_category", [ctx.getters.get_category_by_id(category.id), key, value]);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	},
 };

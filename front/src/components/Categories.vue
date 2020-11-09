@@ -6,7 +6,7 @@
 
 			<v-spacer></v-spacer>
 
-			<v-btn icon @click.stop="editDialog = true" v-if="selectedCategory > 0">
+			<v-btn icon @click.stop="attDialog = true" v-if="selectedCategory > 0">
 				<v-icon>mdi-pencil</v-icon>
 			</v-btn>
 			<v-btn icon @click.stop="addDialog = true" v-else>
@@ -15,9 +15,7 @@
 		</v-toolbar>
 
 		<!-- dialogs -->
-		<v-dialog v-model="editDialog" max-width="30%" overlay-opacity="0.3">
-			<EditCategoryDialog @close-dialog="editDialog = false"></EditCategoryDialog>
-		</v-dialog>
+		<EditCategoryDialog @close-dialog="attDialog = false" :attDialog="attDialog" :category="{ ...getCategory(getSelected) }"></EditCategoryDialog>
 
 		<AddCategoryDialog @close-dialog="addDialog = false" :addDialog="addDialog"></AddCategoryDialog>
 
@@ -52,7 +50,7 @@
 		},
 		data() {
 			return {
-				editDialog: false,
+				attDialog: false,
 				addDialog: false,
 			};
 		},
@@ -60,6 +58,7 @@
 			...mapGetters({
 				categories: "get_categories",
 				getSelected: "get_selected_category",
+				getCategory: "get_category_by_id",
 			}),
 
 			selectedCategory: {
