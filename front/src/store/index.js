@@ -46,6 +46,9 @@ export default new Vuex.Store({
 		patch_category(state, [category, key, value]) {
 			category[key] = value;
 		},
+		delete_category(state, category) {
+			state.categories = state.categories.filter((el) => el.id != category.id);
+		},
 	},
 	actions: {
 		//TODO stuff
@@ -89,6 +92,10 @@ export default new Vuex.Store({
 		},
 		patch_category(ctx, [category, key, value]) {
 			categoryRequests.patch_category(ctx, category, key, value);
+		},
+		delete_category(ctx, category) {
+			categoryRequests.delete_category(ctx, category);
+			ctx.commit("set_selected_category", 0);
 		},
 	},
 	getters: {

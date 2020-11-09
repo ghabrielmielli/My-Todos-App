@@ -42,4 +42,16 @@ export default {
 				});
 		}
 	},
+
+	delete_category(ctx, category) {
+		axios.delete(routes.delete_category(category.id))
+			.then((response) => {
+				console.log(response.status + " - " + response.data.message);
+				ctx.commit("delete_category", category);
+				ctx.dispatch("fetch_todos");
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	},
 };
