@@ -36,8 +36,8 @@
 </template>
 
 <script>
-	import TodoList from "./components/TodoList";
-	import Categories from "./components/Categories";
+	import TodoList from "./components/Todos section/TodoList";
+	import Categories from "./components/Categories section/Categories";
 
 	export default {
 		components: {
