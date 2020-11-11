@@ -1,7 +1,6 @@
 /**
- * This file's burden is just to convert backend routes
- * into more legible names, as well as to help devs have a
- * smoother understanding of supplementary code.
+ * This file converts and exports backend routes
+ * with more legible names
  */
 
 const URL = "http://localhost:3000/";

@@ -1,7 +1,7 @@
 <template>
 	<v-card flat rounded="lg" min-height="70vh">
+		<!-- toolbar section -->
 		<v-toolbar flat class="mb-0 pb-0">
-			<!-- toolbar section -->
 			<v-row>
 				<!-- Add todo field -->
 				<v-col cols="6">
@@ -44,7 +44,7 @@
 		<!-- items section -->
 		<v-card-text class="pt-0 mt-0">
 			<v-expand-transition>
-				<div v-show="!change">
+				<div v-show="!isChanging">
 					<v-list>
 						<TodoItem
 							v-for="todo in filteredTodos"
@@ -62,8 +62,7 @@
 	</v-card>
 </template>
 <script>
-	import { mapGetters } from "vuex";
-	import { mapActions } from "vuex";
+	import { mapGetters, mapActions } from "vuex";
 	import TodoItem from "./TodoItem";
 	import ButtonWithTooltip from "./ButtonWithTooltip";
 
@@ -75,15 +74,9 @@
 		data() {
 			return {
 				newTodo: "",
-				editingTodo: -1,
-				invalidTodo: false,
-				change: false,
+				editingTodo: -1, //the index of the todo that is being edited. -1 means no todo is being edited.
+				invalidTodo: false, //controls the display of the new todo input field
 			};
-		},
-		watch: {
-			isChanging: function(newVal) {
-				this.change = newVal;
-			},
 		},
 		computed: {
 			...mapGetters({
@@ -95,27 +88,21 @@
 		},
 		methods: {
 			...mapActions(["add_todo", "delete_done_todos", "check_uncheck_all_todos"]),
+
 			addTodo() {
 				this.invalidTodo = !this.newTodo;
+
 				if (this.newTodo) {
 					this.add_todo(this.newTodo);
 					this.newTodo = "";
 				}
+
+				setTimeout(() => {
+					this.invalidTodo = false;
+				}, 2000);
 			},
 		},
 	};
 </script>
 
-<style scoped>
-	.fade-item {
-		transition: all 0.6s;
-	}
-	.fade-enter,
-	.fade-leave-to {
-		opacity: 0;
-		transform: scaleY(0);
-	}
-	.fade-leave-active {
-		position: absolute;
-	}
-</style>
+<style scoped></style>

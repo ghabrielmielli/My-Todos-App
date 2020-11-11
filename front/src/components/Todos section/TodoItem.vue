@@ -5,6 +5,7 @@
 		</v-list-item-action>
 
 		<v-list-item-content>
+			<!-- The item's title is different based on if it is currently being edited or not. -->
 			<v-list-item-title
 				v-if="!isEditing"
 				@click="editTodo()"
@@ -42,6 +43,7 @@
 		props: { todo: Object, isEditing: Boolean },
 		methods: {
 			editTodo() {
+				//A timer is set so that it is possible to delete a todo with a double click.
 				setTimeout(
 					function() {
 						this.$emit("edit-me");

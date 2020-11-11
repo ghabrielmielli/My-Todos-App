@@ -6,6 +6,7 @@
 
 			<v-spacer></v-spacer>
 
+			<!-- The button is different depending on the currently selected category. Enables editing or adding a new category. -->
 			<v-btn icon @click.stop="attDialog = true" v-if="selectedCategory > 0">
 				<v-icon>mdi-pencil</v-icon>
 			</v-btn>
@@ -66,6 +67,7 @@
 					return this.getSelected;
 				},
 				set(category) {
+					//The series of timeouts are used to enable transitioning between the lists of todos.
 					this.changing_category_status(true);
 					setTimeout(() => {
 						this.set_selected_category(category != undefined ? this.categories[category].id : undefined);

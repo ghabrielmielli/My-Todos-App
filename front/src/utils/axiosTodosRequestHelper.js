@@ -1,3 +1,5 @@
+//This file is responsible for making requests related to todo data to the backend and sending their results to the vuex store.
+
 import routes from "./axiosRoutes";
 import axios from "axios";
 
