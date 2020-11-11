@@ -11,7 +11,6 @@
 					@click:append-outer="deleteDialog = true"
 					@keyup.enter="attCategory()"
 				></v-text-field>
-				<v-text-field v-else autofocus placeholder="nao deu certo" prepend-icon="mdi-pencil" @keyup.enter="attCategory()"></v-text-field>
 			</v-card-title>
 		</v-card>
 		<DeleteCategoryDialog :deleteDialog="deleteDialog" @close="deleteDialog = false" @delete="deleteCategory()"></DeleteCategoryDialog>

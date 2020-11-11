@@ -1,8 +1,8 @@
 <template>
 	<v-app>
-		<v-icon color="white">mdi-home</v-icon>
-		<!-- just to make the title cetered LOL -->
-		<v-app-bar app color="indigo lighten-1" dark flat>
+		<v-app-bar app color="primary" dark flat>
+			<!-- This icon is just to make the title cetered -->
+			<v-icon color="primary">mdi-home</v-icon>
 			<v-spacer></v-spacer>
 			<v-card-title primary-title>
 				My Simple Todo List
@@ -20,7 +20,7 @@
 			</v-tooltip>
 		</v-app-bar>
 
-		<v-main class="blue lighten-3">
+		<v-main class="secondary">
 			<v-container fluid>
 				<v-row>
 					<v-col cols="3">

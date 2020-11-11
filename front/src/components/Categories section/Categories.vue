@@ -1,7 +1,7 @@
 <template>
 	<v-card flat>
 		<!-- Toolbar -->
-		<v-toolbar color="indigo lighten-1" dark flat>
+		<v-toolbar color="primary" dark flat>
 			<v-toolbar-title>Categories</v-toolbar-title>
 
 			<v-spacer></v-spacer>
@@ -20,8 +20,8 @@
 		<AddCategoryDialog @close-dialog="addDialog = false" :addDialog="addDialog"></AddCategoryDialog>
 
 		<!-- category list -->
-		<v-list color="transparent">
-			<v-list-item-group color="indigo" v-model="selectedCategory">
+		<v-list color="">
+			<v-list-item-group color="primary" v-model="selectedCategory">
 				<v-slide-y-transition group>
 					<v-list-item v-for="category in categories" :key="category.id" link>
 						<v-list-item-content>

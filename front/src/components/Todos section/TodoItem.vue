@@ -1,7 +1,7 @@
 <template>
 	<v-list-item>
 		<v-list-item-action>
-			<v-checkbox :value="todo.done" v-model="checked" color="indigo lighten-1"></v-checkbox>
+			<v-checkbox :value="todo.done" v-model="checked" color="secondary"></v-checkbox>
 		</v-list-item-action>
 
 		<v-list-item-content>
