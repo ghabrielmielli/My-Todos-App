@@ -66,12 +66,18 @@
 					return this.getSelected;
 				},
 				set(category) {
-					this.set_selected_category(category != undefined ? this.categories[category].id : undefined);
+					this.changing_category_status(true);
+					setTimeout(() => {
+						this.set_selected_category(category != undefined ? this.categories[category].id : undefined);
+						setTimeout(() => {
+							this.changing_category_status(false);
+						}, 100);
+					}, 300);
 				},
 			},
 		},
 		methods: {
-			...mapMutations(["set_selected_category"]),
+			...mapMutations(["set_selected_category", "changing_category_status"]),
 		},
 	};
 </script>

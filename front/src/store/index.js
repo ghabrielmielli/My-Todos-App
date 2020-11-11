@@ -13,6 +13,8 @@ export default new Vuex.Store({
 		categories: [],
 
 		selectedCategory: 0, //0 is all categories, -1 is no category.
+
+		changingCategory: false,
 	},
 	mutations: {
 		//TODO stuff
@@ -30,6 +32,9 @@ export default new Vuex.Store({
 		},
 		set_selected_category(state, categoryId) {
 			state.selectedCategory = categoryId;
+		},
+		changing_category_status(state, isChanging) {
+			state.changingCategory = isChanging;
 		},
 		delete_todo(state, todo) {
 			state.todos = state.todos.filter((el) => el.id != todo.id);
@@ -106,5 +111,7 @@ export default new Vuex.Store({
 
 		get_todo_by_id: (state) => (id) => state.todos.find((todo) => todo.id === id),
 		get_category_by_id: (state) => (id) => state.categories.find((category) => category.id === id),
+
+		get_changing_category_status: (state) => state.changingCategory,
 	},
 });

@@ -1,6 +1,6 @@
 <template>
 	<v-card flat rounded="lg" min-height="70vh">
-		<v-toolbar flat>
+		<v-toolbar flat class="mb-0 pb-0">
 			<!-- toolbar section -->
 			<v-row>
 				<!-- Add todo field -->
@@ -42,19 +42,23 @@
 		</v-toolbar>
 
 		<!-- items section -->
-		<v-list>
-			<transition-group name="fade" mode="out-in">
-				<TodoItem
-					v-for="todo in filteredTodos"
-					:key="todo.id"
-					class="fade-item"
-					:todo="{ ...todo }"
-					:isEditing="todo.id == editingTodo"
-					@edit-me="editingTodo = todo.id"
-					@finish-edit="editingTodo = -1"
-				></TodoItem>
-			</transition-group>
-		</v-list>
+		<v-card-text class="pt-0 mt-0">
+			<v-expand-transition>
+				<div v-show="!change">
+					<v-list>
+						<TodoItem
+							v-for="todo in filteredTodos"
+							:key="todo.id"
+							class="fade-item"
+							:todo="{ ...todo }"
+							:isEditing="todo.id == editingTodo"
+							@edit-me="editingTodo = todo.id"
+							@finish-edit="editingTodo = -1"
+						></TodoItem>
+					</v-list>
+				</div>
+			</v-expand-transition>
+		</v-card-text>
 	</v-card>
 </template>
 <script>
@@ -73,13 +77,20 @@
 				newTodo: "",
 				editingTodo: -1,
 				invalidTodo: false,
+				change: false,
 			};
+		},
+		watch: {
+			isChanging: function(newVal) {
+				this.change = newVal;
+			},
 		},
 		computed: {
 			...mapGetters({
 				todos: "get_todos",
 				selectedCategory: "get_selected_category",
 				filteredTodos: "get_filtered_todos_by_category",
+				isChanging: "get_changing_category_status",
 			}),
 		},
 		methods: {

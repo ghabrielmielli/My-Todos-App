@@ -7,7 +7,7 @@
 			</v-btn>
 			<v-spacer></v-spacer>
 			<v-card-title primary-title>
-				My Simple Todo List
+				Todos App
 			</v-card-title>
 			<v-spacer></v-spacer>
 			<v-tooltip bottom>
