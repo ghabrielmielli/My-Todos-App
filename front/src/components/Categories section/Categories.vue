@@ -25,7 +25,7 @@
 				<v-slide-y-transition group>
 					<v-list-item v-for="category in categories" :key="category.id" link>
 						<v-list-item-content>
-							<v-list-item-title>
+							<v-list-item-title class="textContent--text">
 								{{ category.name }}
 							</v-list-item-title>
 						</v-list-item-content>

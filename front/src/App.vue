@@ -2,7 +2,9 @@
 	<v-app>
 		<v-app-bar app color="primary" dark flat>
 			<!-- This icon is just to make the title cetered -->
-			<v-icon color="primary">mdi-home</v-icon>
+			<v-btn icon @click="$vuetify.theme.dark = !$vuetify.theme.dark">
+				<v-icon>mdi-theme-light-dark</v-icon>
+			</v-btn>
 			<v-spacer></v-spacer>
 			<v-card-title primary-title>
 				My Simple Todo List

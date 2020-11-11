@@ -5,7 +5,12 @@
 		</v-list-item-action>
 
 		<v-list-item-content>
-			<v-list-item-title v-if="!isEditing" @click="editTodo()" @dblclick="delete_todo(todo)" :class="{ 'text--disabled text-decoration-line-through': todo.done }">
+			<v-list-item-title
+				v-if="!isEditing"
+				@click="editTodo()"
+				@dblclick="delete_todo(todo)"
+				:class="{ 'textContent--text': !todo.done, 'text--disabled text-decoration-line-through': todo.done }"
+			>
 				{{ todo.name }}
 			</v-list-item-title>
 

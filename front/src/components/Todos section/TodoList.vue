@@ -1,6 +1,6 @@
 <template>
 	<v-card flat rounded="lg" min-height="70vh">
-		<v-toolbar color="" flat>
+		<v-toolbar flat>
 			<!-- toolbar section -->
 			<v-row>
 				<!-- Add todo field -->
