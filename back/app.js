@@ -10,10 +10,12 @@ app.use(bodyparser.json());
 app.use(cors());
 app.use(log);
 
-//Root router
+//Root router (unused)
+/*
 app.get("/", (req, res) => {
 	res.send("<h1> Hi, you're on the root </h1>");
 });
+*/
 
 //todos router
 const todosRoutes = require("./routes/todos");
@@ -25,5 +27,5 @@ app.use("/categories", categoriesRoutes);
 
 //Server start
 app.listen("3000", (err) => {
-	console.log(err ? `Deu ruim: ${err}` : "Server running at port 3000");
+	console.log(err ? `There was an error starting the server:\n${err}` : "Server running at port 3000");
 });

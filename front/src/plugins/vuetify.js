@@ -16,7 +16,7 @@ export default new Vuetify({
 				textContent: colors.shades.black,
 			},
 			dark: {
-				primary: colors.teal.darken3,
+				primary: colors.blueGrey.darken4,
 				secondary: colors.teal.darken4,
 				accent: colors.teal.base,
 				textContent: colors.grey.lighten2,

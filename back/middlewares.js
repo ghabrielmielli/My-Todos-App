@@ -1,6 +1,7 @@
-function log(req, res, next) {
-    console.log(`Requested URL: ${req.url}      @${Date.now()}`);
-    next();
+//Logs the requested URL on the console.
+function logURL(req, res, next) {
+	console.log(`Requested URL: ${req.url}  AT  @${Date.now()}`);
+	next();
 }
 
-module.exports = {log};
+module.exports = { logURL };

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const db = require("../database/dbconfig");
 
 router.route("/")
+	//This route returns all the categories from the database
 	.get((req, res) => {
 		let sql = "SELECT * FROM category";
 
@@ -10,6 +11,10 @@ router.route("/")
 			res.send(results);
 		});
 	})
+	/**
+	 * This route requires a 'name' property on the request body.
+	 * Add a new category to the database.
+	 */
 	.post((req, res) => {
 		let sql = "INSERT INTO category (name) VALUES (?)";
 
@@ -21,6 +26,7 @@ router.route("/")
 	});
 
 router.route("/:id")
+	//This route returns a category based on the given ID.
 	.get((req, res) => {
 		let sql = "SELECT * FROM category WHERE id = ?";
 
@@ -29,9 +35,7 @@ router.route("/:id")
 			res.send(results);
 		});
 	})
-	.post((req, res) => {
-		res.send(`Yo posting ${req.params.id} on category list :D`);
-	})
+	//This route deletes a category by it's ID.
 	.delete((req, res) => {
 		let sql = "DELETE FROM category WHERE id = ?";
 
@@ -41,6 +45,10 @@ router.route("/:id")
 			res.send(results);
 		});
 	})
+	/**
+	 * This route requires a 'key' and a 'value' property on the request body.
+	 * Patch the given 'key' with the new 'value' from the category with the given ID.
+	 */
 	.patch((req, res) => {
 		let sql = `UPDATE category SET ${req.body.key} = ? WHERE id = ?`;
 
