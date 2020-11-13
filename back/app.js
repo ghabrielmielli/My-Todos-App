@@ -3,15 +3,16 @@ const cors = require("cors");
 const bodyparser = require("body-parser");
 const app = express();
 
-const { log } = require("./middlewares");
+const { logURL } = require("./middlewares");
 
 //Global middlewares
 app.use(bodyparser.json());
 app.use(cors());
-app.use(log);
+app.use(logURL);
 
-//Root router (unused)
 /*
+Root router (unused)
+
 app.get("/", (req, res) => {
 	res.send("<h1> Hi, you're on the root </h1>");
 });
