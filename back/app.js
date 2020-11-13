@@ -28,5 +28,5 @@ app.use("/categories", categoriesRoutes);
 
 //Server start
 app.listen("3000", (err) => {
-	console.log(err ? `There was an error starting the server:\n${err}` : "Server running at port 3000");
+	console.log(err ? `There was an error starting the server:\n${err}` : "Server listening at port 3000...");
 });

@@ -37,6 +37,9 @@ router.route("/:id")
 	})
 	//This route deletes a category by it's ID.
 	.delete((req, res) => {
+		if (req.params.id == 0) {
+			res.send({ message: "Can't Delete this category!" });
+		}
 		let sql = "DELETE FROM category WHERE id = ?";
 
 		db.query(sql, req.params.id, (err, results) => {
