@@ -64,7 +64,7 @@
 
 			selectedCategory: {
 				get() {
-					return this.getSelected;
+					return this.categories.indexOf(this.getSelected);
 				},
 				set(category) {
 					//The series of timeouts are used to enable transitioning between the lists of todos.
