@@ -67,19 +67,12 @@
 					return this.categories.indexOf(this.getSelected);
 				},
 				set(category) {
-					//The series of timeouts are used to enable transitioning between the lists of todos.
-					this.changing_category_status(true);
-					setTimeout(() => {
-						this.set_selected_category(category != undefined ? this.categories[category].id : undefined);
-						setTimeout(() => {
-							this.changing_category_status(false);
-						}, 100);
-					}, 300);
+					this.set_selected_category(category != undefined ? this.categories[category].id : undefined);
 				},
 			},
 		},
 		methods: {
-			...mapMutations(["set_selected_category", "changing_category_status"]),
+			...mapMutations(["set_selected_category"]),
 		},
 	};
 </script>

@@ -21,11 +21,6 @@ export default new Vuex.Store({
 		 * Stores the current active category on the list of categories. 0 means all categories are selected, -1 means no category is selected.
 		 */
 		selectedCategory: 0,
-
-		/**
-		 * This is currently used just to support the todos transition effect ATM.
-		 */
-		changingCategory: false,
 	},
 	mutations: {
 		//	Todo related mutations
@@ -61,9 +56,6 @@ export default new Vuex.Store({
 		},
 		set_selected_category(state, categoryId) {
 			state.selectedCategory = categoryId;
-		},
-		changing_category_status(state, isChanging) {
-			state.changingCategory = isChanging;
 		},
 	},
 	actions: {
