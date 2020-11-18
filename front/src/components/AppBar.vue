@@ -1,7 +1,7 @@
 <template>
 	<v-app-bar app color="primary" dark flat>
 		<!-- This button toggles the color theme between light and dark mode -->
-		<v-btn icon @click="$vuetify.theme.dark = !$vuetify.theme.dark">
+		<v-btn icon @click="toggleDarkMode()">
 			<v-icon>mdi-theme-light-dark</v-icon>
 		</v-btn>
 
@@ -27,6 +27,14 @@
 	</v-app-bar>
 </template>
 
-<script></script>
+<script>
+	export default {
+		methods: {
+			toggleDarkMode() {
+				this.$vuetify.theme.dark = localStorage.darkMode = !(localStorage.darkMode == "true");
+			},
+		},
+	};
+</script>
 
 <style></style>>

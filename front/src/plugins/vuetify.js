@@ -7,7 +7,7 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
 	theme: {
-		dark: false,
+		dark: localStorage.darkMode == "true",
 		themes: {
 			light: {
 				primary: colors.teal.base,
