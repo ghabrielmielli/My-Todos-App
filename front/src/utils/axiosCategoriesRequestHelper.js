@@ -2,6 +2,7 @@
 
 import routes from "./axiosRoutes";
 import axios from "axios";
+import errorHandler from "./errorHandler";
 
 export default {
 	get_categories(ctx) {
@@ -11,7 +12,7 @@ export default {
 				ctx.commit("set_categories", res.data);
 			})
 			.catch((err) => {
-				console.log(err);
+				errorHandler(ctx, err);
 			});
 	},
 
@@ -26,8 +27,7 @@ export default {
 				ctx.commit("add_category", postingCategory);
 			})
 			.catch((err) => {
-				console.log("deu ruim:::");
-				console.log(err);
+				errorHandler(ctx, err);
 			});
 	},
 
@@ -40,7 +40,7 @@ export default {
 					ctx.commit("patch_category", [ctx.getters.get_category_by_id(category.id), key, value]);
 				})
 				.catch((err) => {
-					console.log(err);
+					errorHandler(ctx, err);
 				});
 		}
 	},
@@ -53,7 +53,7 @@ export default {
 				ctx.dispatch("fetch_todos");
 			})
 			.catch((err) => {
-				console.log(err);
+				errorHandler(ctx, err);
 			});
 	},
 };

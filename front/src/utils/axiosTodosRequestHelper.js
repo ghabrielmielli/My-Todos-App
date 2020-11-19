@@ -2,6 +2,7 @@
 
 import routes from "./axiosRoutes";
 import axios from "axios";
+import errorHandler from "./errorHandler";
 
 export default {
 	get_todos(ctx) {
@@ -11,12 +12,7 @@ export default {
 				ctx.commit("set_todos", res.data);
 			})
 			.catch((err) => {
-				console.log("Ooopsie, there was an error!");
-				if (err.message == "Network Error") {
-					console.log("The server is offline!");
-					ctx.commit("set_error", "Looks like the server is offline! Are you sure it is running?");
-				}
-				console.log(err);
+				errorHandler(ctx, err);
 			});
 	},
 	insert_todo(ctx, todoName) {
@@ -33,7 +29,7 @@ export default {
 				ctx.commit("add_todo", postingTodo);
 			})
 			.catch((err) => {
-				console.log(err);
+				errorHandler(ctx, err);
 			});
 	},
 	delete_todo(ctx, todo) {
@@ -43,7 +39,7 @@ export default {
 				ctx.commit("delete_todo", todo);
 			})
 			.catch((err) => {
-				console.log(err);
+				errorHandler(ctx, err);
 			});
 	},
 	patch_todo(ctx, todo, key, value) {
@@ -55,7 +51,7 @@ export default {
 					ctx.commit("patch_todo", [ctx.getters.get_todo_by_id(todo.id), key, value]);
 				})
 				.catch((err) => {
-					console.log(err);
+					errorHandler(ctx, err);
 				});
 		}
 	},
@@ -66,7 +62,7 @@ export default {
 				ctx.dispatch("fetch_todos");
 			})
 			.catch((err) => {
-				console.log(err);
+				errorHandler(ctx, err);
 			});
 	},
 
@@ -77,7 +73,7 @@ export default {
 				ctx.dispatch("fetch_todos");
 			})
 			.catch((err) => {
-				console.log(err);
+				errorHandler(ctx, err);
 			});
 	},
 };
