@@ -7,7 +7,7 @@
 			<v-spacer></v-spacer>
 
 			<!-- The button is different depending on the currently selected category. Enables editing or adding a new category. -->
-			<v-btn icon @click.stop="attDialog = true" v-if="selectedCategory > 0">
+			<v-btn icon @click.stop="attDialog = true" v-if="getSelected > 0">
 				<v-icon>mdi-pencil</v-icon>
 			</v-btn>
 			<v-btn icon @click.stop="addDialog = true" v-else>

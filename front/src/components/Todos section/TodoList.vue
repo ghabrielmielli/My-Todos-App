@@ -1,5 +1,5 @@
 <template>
-	<v-card flat rounded="lg" min-height="85vh" max-height="85vh" v-scroll.self="onScroll" class="overflow-y-auto hide-scroll-bar">
+	<v-card flat rounded="lg" min-height="85vh" max-height="85vh" class="overflow-y-auto hide-scroll-bar">
 		<!-- toolbar section -->
 		<v-toolbar flat class="mb-0 pb-0" max-height="5vh">
 			<v-row>
