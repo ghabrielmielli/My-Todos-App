@@ -11,6 +11,11 @@ export default {
 				ctx.commit("set_todos", res.data);
 			})
 			.catch((err) => {
+				console.log("Ooopsie, there was an error!");
+				if (err.message == "Network Error") {
+					console.log("The server is offline!");
+					ctx.commit("set_error", "Looks like the server is offline! Are you sure it is running?");
+				}
 				console.log(err);
 			});
 	},

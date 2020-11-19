@@ -13,6 +13,7 @@
 					</v-col>
 				</v-row>
 			</v-container>
+			<ErrorAlert></ErrorAlert>
 		</v-main>
 	</v-app>
 </template>
@@ -21,12 +22,14 @@
 	import TodoList from "./components/Todos section/TodoList";
 	import Categories from "./components/Categories section/Categories";
 	import AppBar from "./components/AppBar";
+	import ErrorAlert from "./components/ErrorAlert";
 
 	export default {
 		components: {
 			TodoList,
 			Categories,
 			AppBar,
+			ErrorAlert,
 		},
 	};
 </script>

@@ -21,6 +21,8 @@ export default new Vuex.Store({
 		 * Stores the current active category on the list of categories. 0 means all categories are selected, -1 means no category is selected.
 		 */
 		selectedCategory: 0,
+
+		errorMessage: "", // Once it has a value, pops up an error on screen.
 	},
 	mutations: {
 		//	Todo related mutations
@@ -56,6 +58,12 @@ export default new Vuex.Store({
 		},
 		set_selected_category(state, categoryId) {
 			state.selectedCategory = categoryId;
+		},
+
+		// Others
+
+		set_error(state, errorMessage) {
+			state.errorMessage = errorMessage;
 		},
 	},
 	actions: {
@@ -117,6 +125,6 @@ export default new Vuex.Store({
 		get_selected_category: (state) => state.selectedCategory,
 
 		// other data
-		get_changing_category_status: (state) => state.changingCategory,
+		get_error_message: (state) => state.errorMessage,
 	},
 });
