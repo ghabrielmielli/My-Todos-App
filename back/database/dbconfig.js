@@ -13,8 +13,8 @@ const db = mysql.createConnection({
 });
 
 console.log("Checking on database configurations...");
-createDb();
-connectToDb();
-createTables();
+createDb(db);
+connectToDb(db);
+createTables(db);
 
 module.exports = db;

@@ -1,6 +1,6 @@
 module.exports = {
 	//Creates a database for the todos if it doesn't exist
-	createDb: function () {
+	createDb: function (db) {
 		let sql = "CREATE DATABASE IF NOT EXISTS todos";
 
 		db.query(sql, (err, results) => {
@@ -9,7 +9,7 @@ module.exports = {
 	},
 
 	//Connects to the todos database after certifying it exists
-	connectToDb: function () {
+	connectToDb: function (db) {
 		db.changeUser({ database: "todos" }, function (err) {
 			if (err) throw err;
 			console.log("MySQL conected to 'todos' database...");
@@ -17,7 +17,7 @@ module.exports = {
 	},
 
 	//Setup the tables used on the application, along with the necessary category '0'
-	createTables: function () {
+	createTables: function (db) {
 		let sql = `CREATE TABLE IF NOT EXISTS category (
 		id smallint(6) UNSIGNED NOT NULL AUTO_INCREMENT,
 		name varchar(80) NOT NULL,
