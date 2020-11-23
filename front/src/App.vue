@@ -1,5 +1,6 @@
 <template>
 	<v-app>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
 		<AppBar></AppBar>
 
 		<v-main class="secondary">
@@ -13,7 +14,9 @@
 					</v-col>
 				</v-row>
 			</v-container>
+			<!-- Pop ups -->
 			<ErrorAlert></ErrorAlert>
+			<Welcome></Welcome>
 		</v-main>
 	</v-app>
 </template>
@@ -23,6 +26,7 @@
 	import Categories from "./components/Categories section/Categories";
 	import AppBar from "./components/AppBar";
 	import ErrorAlert from "./components/ErrorAlert";
+	import Welcome from "./components/Welcome";
 
 	export default {
 		components: {
@@ -30,6 +34,7 @@
 			Categories,
 			AppBar,
 			ErrorAlert,
+			Welcome,
 		},
 	};
 </script>
