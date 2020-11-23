@@ -16,19 +16,29 @@
 		<!-- This icon's tooltip is for usage instructions -->
 		<v-tooltip bottom>
 			<template v-slot:activator="{ on, attrs }">
-				<v-icon dark v-bind="attrs" v-on="on">
+				<v-icon dark v-bind="attrs" v-on="on" @click="infoDialog = true">
 					mdi-help-circle-outline
 				</v-icon>
 			</template>
 			<p>Click a todo to enable editing.</p>
 			<p>Double click a todo to delete it.</p>
-			<p>Hover the bin button for its info.</p>
+			<p>Click for further information...</p>
 		</v-tooltip>
+		<AppInformation :open="infoDialog" @close="infoDialog = false"></AppInformation>
 	</v-app-bar>
 </template>
 
 <script>
+	import AppInformation from "./AppInformation";
 	export default {
+		data() {
+			return {
+				infoDialog: false,
+			};
+		},
+		components: {
+			AppInformation,
+		},
 		methods: {
 			toggleDarkMode() {
 				this.$vuetify.theme.dark = localStorage.darkMode = !(localStorage.darkMode == "true");

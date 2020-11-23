@@ -12,7 +12,7 @@ export default new Vuetify({
 			light: {
 				primary: colors.teal.base,
 				secondary: colors.teal.lighten2,
-				accent: colors.teal.accent4,
+				accent: colors.teal.accent2,
 				textContent: colors.shades.black,
 				error: colors.red.darken2,
 			},
