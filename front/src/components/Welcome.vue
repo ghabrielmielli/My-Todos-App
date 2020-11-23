@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="hasNoCategories" width="45vw">
+	<v-dialog v-model="hasNoCategories" width="45vw" persistent>
 		<v-card color="primary" dark>
 			<v-card-title primary-title>
 				Hey, welcome!
