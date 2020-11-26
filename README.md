@@ -25,12 +25,14 @@ Now, open the `dbconfig.js` file on the directory: `.../back/database/dbconfig.j
 ```javascript
 //Connects to mysql using the provided credentials
 const db = mysql.createConnection({
-	host: "YOUR HOST HERE", //localhost
+	host: "YOUR HOST HERE",
 	user: "YOUR USER HERE",
 	password: "YOUR PASSWORD HERE",
-	port: THE_PORT_NUMBER_HERE, //8889
+	port: THE_PORT_NUMBER_HERE,
 });
 ```
+
+> Please note that other way of doing this is by setting environment variables. Refer to the *dotenv* link at the Acknowledgements section for further information.
 
 ### Installation
 
@@ -105,6 +107,7 @@ Ghabriel Mielli - <ghabrielmielli@hotmail.com>
 - [Express.js](https://expressjs.com/)
 - [Axios](https://www.npmjs.com/package/axios)
 - [node mysql](https://www.npmjs.com/package/mysql)
+- [dotenv](https://www.npmjs.com/package/dotenv)
 
 
 
