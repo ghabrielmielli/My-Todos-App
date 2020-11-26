@@ -6,10 +6,10 @@ const mysql = require("mysql");
 
 //Connects to mysql using the provided credentials
 const db = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "ovocompao",
-	port: 8889,
+	host: process.env.DB_HOST,
+	user: process.env.DB_USER,
+	password: process.env.DB_PASS,
+	port: process.env.DB_PORT,
 });
 
 console.log("Checking on database configurations...");
